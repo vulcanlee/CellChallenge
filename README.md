@@ -7,3 +7,7 @@
 挑戰練習過程中，請不要寫任何 Code Behind 程式碼，全程使用 MVVM 方式開發。 
 
 ![Xamarin.Forms ListView ViewCell Data](CellChallengeQuestion.png)
+
+## Commint 1
+
+設計一個按鈕，按下後，就會進行統計，並且顯示出訂購商品總金額

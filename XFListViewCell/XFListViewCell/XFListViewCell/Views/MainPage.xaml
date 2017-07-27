@@ -4,8 +4,111 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="XFListViewCell.Views.MainPage"
-             Title="MainPage">
-  <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-    <Label Text="{Binding Title}" />
-  </StackLayout>
+             Title="購物清單">
+
+    <Grid
+        RowSpacing="0" ColumnSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--頁面上方金額統計區域-->
+        <Grid
+            Grid.Row="0"
+            RowSpacing="0" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+
+            <BoxView
+                Color="Gray"
+                Grid.ColumnSpan="2"/>
+            <StackLayout
+                Grid.Column="0"
+                Orientation="Horizontal"
+                VerticalOptions="Center" HorizontalOptions="Start"
+                Margin="10,0"
+                Spacing="0">
+                <Label
+                    Text="合計金額："
+                    TextColor="White"/>
+                <Label
+                    Text="{Binding SumCost, StringFormat='{0} 元'}"
+                    TextColor="White"/>
+            </StackLayout>
+            <Button
+                Grid.Column="1"  
+                Text="計算"
+                Command="{Binding CalSumCommand}"
+                Margin="10,5"/>
+
+        </Grid>
+        
+        <!--頁面下方清單項目-->
+        <ListView
+            Grid.Row="1"
+            ItemsSource="{Binding ProductItems}"
+            SelectedItem="{Binding SelectedProductItem}"
+            HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout
+                            Orientation="Vertical">
+                            <Label
+                                Text="{Binding Name}"
+                                TextColor="Black"
+                                FontSize="22"
+                                />
+                            <Label
+                                Text="{Binding price, StringFormat='{0} 元'}"
+                                TextColor="Pink"
+                                FontSize="18"
+                                />
+                            <StackLayout
+                                Orientation="Horizontal"
+                                HorizontalOptions="End"
+                                WidthRequest="250"
+                                >
+                                <Label
+                                    HorizontalOptions="Start" VerticalOptions="Center"
+                                    Text="數量"/>
+                                <!--若將 HorizontalOptions="FillAndExpand" 移除，會有甚麼效果產生-->
+                                <Entry
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="{Binding number}" 
+                                    BackgroundColor="#c3e0c5"
+                                    HorizontalTextAlignment="End"
+                                    Keyboard="Numeric"
+                                    Margin="20,0"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+        </ListView>
+        
+        <!--這裡使用一個遮罩，告知使用者，現在正在忙碌於計算統計資料中-->
+        <Grid
+            Grid.RowSpan="2"
+            ColumnSpacing="0" RowSpacing="0"
+            IsVisible="{Binding ShowBusyMark}"
+            >
+            <BoxView
+                Color="Black"
+                Opacity="0.6"/>
+            <Label
+                HorizontalOptions="Center" VerticalOptions="Center"
+                Text="計算中，請稍後..."
+                TextColor="White"/>
+            <ActivityIndicator
+                IsRunning="{Binding ShowBusyMark}"
+                HorizontalOptions="Center" VerticalOptions="Center"
+                WidthRequest="100" HeightRequest="100"
+                Margin="0,140,0,0"/>
+        </Grid>
+    </Grid>
 </ContentPage>
