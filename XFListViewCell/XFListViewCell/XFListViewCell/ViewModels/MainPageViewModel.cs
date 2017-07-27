@@ -77,18 +77,21 @@ namespace XFListViewCell.ViewModels
                 Name = "60天世界旅遊一周",
                 price = 168168,
                 number = 1,
+                UpdateSumCommand = new DelegateCommand(CalculateSum),
             });
             ProductItems.Add(new ProductItem
             {
                 Name = "32\"重乳酪起司",
                 price = 742,
                 number = 2,
+                UpdateSumCommand = new DelegateCommand(CalculateSum),
             });
             ProductItems.Add(new ProductItem
             {
                 Name = "海港自助餐劵",
                 price = 468,
                 number = 8,
+                UpdateSumCommand = new DelegateCommand(CalculateSum),
             });
         }
 
