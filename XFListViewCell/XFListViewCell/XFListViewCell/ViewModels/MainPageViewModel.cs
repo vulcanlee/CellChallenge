@@ -40,6 +40,7 @@ namespace XFListViewCell.ViewModels
                     ShowBusyMark = false;
                 });
             });
+
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -69,6 +70,7 @@ namespace XFListViewCell.ViewModels
                 Name = "iPhone 7 Plus 太空金",
                 price = 28000,
                 number = 2,
+                UpdateSumCommand = new DelegateCommand(CalculateSum),
             });
             ProductItems.Add(new ProductItem
             {

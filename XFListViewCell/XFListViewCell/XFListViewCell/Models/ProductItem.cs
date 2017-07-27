@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Commands;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,5 +17,14 @@ namespace XFListViewCell.Models
         public int price { get; set; }
         public int number { get; set; }
 
+        public void OnnumberChanged()
+        {
+            if(UpdateSumCommand!=null)
+            {
+                UpdateSumCommand.Execute();
+            }
+        }
+
+        public DelegateCommand UpdateSumCommand { get; set; }
     }
 }
